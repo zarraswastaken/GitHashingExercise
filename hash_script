@@ -1,2 +1,18 @@
 #!/bin/bash
-echo -n  | sha256sum > hash_output.txt
+#echo -n  | sha256sum > hash_output.txt
+
+
+# thelo 4psifio
+if [[ ! $1 =~ ^[0-9]{4}$ ]]; then
+  echo "Error: Please provide a 4-digit integer as input."
+  exit 1
+fi
+
+input_integer=$1
+hashed_output=$(echo -n "$input_integer" | sha256sum)
+
+
+hash_value=$(echo "$hashed_output" | awk '{print $1}')
+
+echo $hash_value > hash_output.txt
+
